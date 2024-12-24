@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useBlog } from "../contaxt/BlogProvider";
 
 const Create = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,8 @@ const Create = () => {
     liked: false,
     image: null,  
   });
+   const {setBlogs} = useBlog();
+  const navigate = useNavigate();
 
   const [errors, setErrors] = useState({});
 
@@ -55,6 +58,8 @@ const Create = () => {
 
       console.log(res.data);
       alert("Blog Created Successfully");
+      setBlogs(res.data);
+      navigate("/AllBlogs");
     } catch (error) {
       console.error("Error creating blog:", error);
       alert("There is an error creating the blog");

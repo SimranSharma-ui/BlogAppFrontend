@@ -69,13 +69,7 @@ const AllBlogs = () => {
           ))}
         </div>
       )}
-      <div className="flex justify-center mt-4">
-        <Link to={"/"}>
-          <button className="p-3 bg-blue-400 rounded-lg shadow-lg mt-4 hover:bg-blue-700">
-            Create Blogs
-          </button>
-        </Link>
-      </div>
+     
     </div>
   );
 };

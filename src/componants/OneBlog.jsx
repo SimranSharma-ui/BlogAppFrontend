@@ -8,7 +8,7 @@ const OneBlog = () => {
   console.log(oneBlog);
 
   useEffect(() => {
-    fetchOneBlog(id); 
+    fetchOneBlog(id);
   }, [id, fetchOneBlog]);
 
   if (!oneBlog) {
@@ -57,19 +57,9 @@ const OneBlog = () => {
             {oneBlog.liked ? "Liked" : "Not Liked"}
           </span>
         </div>
-        
       </div>
 
      
-         
-
-      <div className="flex justify-center mt-6">
-        <Link to="/AllBlogs">
-          <button className="px-6 py-3 bg-blue-500 text-white rounded-lg shadow-lg hover:bg-blue-600 transition-colors">
-            Go Back to All Blogs
-          </button>
-        </Link>
-      </div>
     </div>
   );
 };

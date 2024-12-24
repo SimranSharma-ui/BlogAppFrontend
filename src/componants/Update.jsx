@@ -1,21 +1,41 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useBlog } from '../contaxt/BlogProvider';
 
-const Create = () => {
+const Update = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { blogs, setBlogs } = useBlog();  
+
   const [formData, setFormData] = useState({
     Name: "",
     Description: "",
     liked: false,
-    image: null,  
+    image: null,
   });
 
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const blogToUpdate = blogs.find(blog => blog._id === id);
+    if (blogToUpdate) {
+      setFormData({
+        Name: blogToUpdate.Name,
+        Description: blogToUpdate.Description,
+        liked: blogToUpdate.liked,
+        image: null, 
+      });
+    } else {
+      alert("Blog not found.");
+      navigate("/AllBlogs");
+    }
+  }, [id, blogs, navigate]);
 
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
-
-    setFormData((prevData) => ({
+    setFormData(prevData => ({
       ...prevData,
       [name]: type === "checkbox" ? checked : type === "file" ? files[0] : value,
     }));
@@ -23,41 +43,45 @@ const Create = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const newErrors = {};
-    if (!formData.Name.trim()) {
-      newErrors.Name = "Name is required!";
-    }
-    if (!formData.Description.trim()) {
-      newErrors.Description = "Description is required!";
-    }
-    if (!formData.image) {
-      newErrors.image = "Image is required!";
-    }
+
+    if (!formData.Name.trim()) newErrors.Name = "Name is required!";
+    if (!formData.Description.trim()) newErrors.Description = "Description is required!";
+    if (!formData.image) newErrors.image = "Image is required!";
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
-    const formDataToSend = new FormData(); 
+    const formDataToSend = new FormData();
     formDataToSend.append("Name", formData.Name);
     formDataToSend.append("Description", formData.Description);
     formDataToSend.append("liked", formData.liked);
     formDataToSend.append("image", formData.image);
 
+    setLoading(true);
+
     try {
-      const res = await axios.post("http://localhost:3000/api/Blog/Create", formDataToSend, {
+      const res = await axios.put(`http://localhost:3000/api/Blog/update/${id}`, formDataToSend, {
         headers: {
-          "Content-Type": "multipart/form-data", 
+          "Content-Type": "multipart/form-data",
         },
       });
 
-      console.log(res.data);
-      alert("Blog Created Successfully");
+      setBlogs(prevBlogs => prevBlogs.map(blog =>
+        blog._id === res.data._id
+          ? { ...blog, Name: res.data.Name, Description: res.data.Description, liked: res.data.liked, Image: res.data.image }
+          : blog
+      ));
+
+      alert("Blog updated successfully!");
+      navigate("/AllBlogs");
     } catch (error) {
-      console.error("Error creating blog:", error);
-      alert("There is an error creating the blog");
+      console.error("Error updating blog:", error);
+      alert("Error updating blog!");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -68,7 +92,7 @@ const Create = () => {
         onSubmit={handleSubmit}
       >
         <h1 className="text-4xl font-extrabold text-white text-center mb-6">
-          Create A Blog
+          Update The Blog
         </h1>
 
         <div className="mb-6">
@@ -121,13 +145,14 @@ const Create = () => {
         <button
           type="submit"
           className="w-full p-4 bg-teal-500 text-white font-semibold rounded-lg hover:bg-teal-600 transition duration-300"
+          disabled={loading}
         >
-          Create Blog
+          {loading ? "Updating..." : "Update Blog"}
         </button>
       </form>
 
       <div className="flex justify-center mt-4">
-        <Link to={"/AllBlogs"}>
+        <Link to="/AllBlogs">
           <button className="p-3 bg-blue-400 rounded-lg shadow-lg hover:bg-blue-700 transition duration-300">
             View All Blogs
           </button>
@@ -137,4 +162,4 @@ const Create = () => {
   );
 };
 
-export default Create;
+export default Update;

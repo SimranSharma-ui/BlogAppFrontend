@@ -5,6 +5,7 @@ import { useBlog } from "../contaxt/BlogProvider";
 const OneBlog = () => {
   const { id } = useParams();
   const { oneBlog, fetchOneBlog } = useBlog();
+  console.log(oneBlog);
 
   useEffect(() => {
     fetchOneBlog(id); 
@@ -56,7 +57,11 @@ const OneBlog = () => {
             {oneBlog.liked ? "Liked" : "Not Liked"}
           </span>
         </div>
+        
       </div>
+
+     
+         
 
       <div className="flex justify-center mt-6">
         <Link to="/AllBlogs">

@@ -1,14 +1,25 @@
 import React from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { useBlog } from "../contaxt/BlogProvider"; // Corrected typo for 'context'
+import { FaDeleteLeft } from "react-icons/fa6";
+import { FaEdit } from "react-icons/fa";
+import { useBlog } from "../contaxt/BlogProvider"; 
 
 const AllBlogs = () => {
-  const { blogs, toggleLike, deleteBlog } = useBlog();
+  const { blogs, deleteBlog } = useBlog();
+ 
+  const truncateDescription = (description, length) => {
+    if (description.length > length) {
+      return `${description.substring(0, length)}...`;
+    }
+    return description;
+  };
 
   return (
     <div className="w-full max-w-7xl p-6 mx-auto">
-      <h1 className="text-3xl font-bold text-center mb-8">All Blogs Are Here</h1>
+      <h1 className="text-3xl font-bold text-center mb-8">
+        All Blogs Are Here
+      </h1>
       {blogs.length === 0 ? (
         <p className="text-xl font-semibold text-center">No blogs available.</p>
       ) : (
@@ -18,37 +29,42 @@ const AllBlogs = () => {
               key={element._id}
               className="bg-white shadow-lg rounded-lg p-6 transition-transform transform hover:scale-105"
             >
-              {/* Wrap the entire blog card in a Link to navigate to the OneBlog component */}
               <Link to={`/OneBlog/${element._id}`} className="block">
-                <img src={element?.Image} className="h-auto w-full" alt="blog" />
+                <img
+                  src={element?.Image}
+                  className="h-auto w-full"
+                  alt="blog"
+                />
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">
                   {element.Name}
                 </h2>
-                <p className="text-gray-600 mb-4">{element.Description}</p>
+                <p className="text-gray-600 mb-4">
+                  {truncateDescription(element.Description, 200)} 
+                </p>
               </Link>
 
-              {/* Like Button */}
               <div className="flex items-center space-x-2">
                 <span
-                  onClick={() => toggleLike(element._id)}
-                  className={`cursor-pointer text-xl ${
+                  className={`cursor-pointer text-2xl mt-2 ${
                     element.liked ? "text-red-500" : "text-gray-400"
                   }`}
                 >
                   {element.liked ? <FaHeart /> : <FaRegHeart />}
                 </span>
-                <span className="text-gray-500 text-sm">
-                  {element.liked ? "Liked" : "Not Liked"}
-                </span>
-              </div>
+            
+                <Link to={`/Update/${element._id}`}>
+                  <button className="mt-4 p-2 bg-blue-500 text-white rounded hover:bg-blue-700">
+                    <FaEdit />
+                  </button>
+                </Link>
 
-              {/* Delete Button */}
-              <button
-                onClick={() => deleteBlog(element._id)}
-                className="mt-4 p-2 bg-red-500 text-white rounded hover:bg-red-700"
-              >
-                Delete Blog
-              </button>
+                <button
+                  onClick={() => deleteBlog(element._id)}
+                  className="mt-4 p-2 bg-red-500 text-white rounded hover:bg-red-700"
+                >
+                  <FaDeleteLeft />
+                </button>
+              </div>
             </div>
           ))}
         </div>

@@ -1,8 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png';
+import { useAuth } from '../contaxt/AuthProvider';
+import Swal from 'sweetalert2';
 
 const NavBar = () => {
+  const { authorised, logout } = useAuth();
+  const navigate = useNavigate();
+  
+  const handleCreateBlogClick = () => {
+    if (!authorised) {
+      Swal.fire({
+             icon: 'error',
+             title: 'You Must First Logged In ',
+             text:  'You Must First Logged In Before Creating The Blog',
+           });
+      navigate("/Login");
+    }
+  };
+
   return (
     <div>
       <div className="bg-gray-800 py-2"> 
@@ -17,36 +33,80 @@ const NavBar = () => {
             </div>
 
             <ul className="flex space-x-8">
-            <li>
+              <li>
                 <Link
                   to={"/"}
-                  className="text-white text-lg cursor-pointer hover:text-teal-500"
+                  className="text-white text-xl cursor-pointer hover:text-teal-500"
                 >
                   Home
                 </Link>
               </li>
-              <li>
-                <Link
-                  to={"/Create"}
-                  className="text-white text-lg cursor-pointer hover:text-teal-500"
-                >
-                  Create Blog
-                </Link>
-              </li>
+
+             
+              {authorised ? (
+                <li>
+                  <Link
+                    to={"/Create"}
+                    className="text-white text-xl cursor-pointer hover:text-teal-500"
+                  >
+                    Create Blog
+                  </Link>
+                </li>
+              ) : (
+                <li>
+                  <button
+                    onClick={handleCreateBlogClick}
+                    className="text-white text-xl cursor-pointer hover:text-teal-500"
+                  >
+                    Create Blog
+                  </button>
+                </li>
+              )}
 
               <li>
                 <Link
                   to={"/AllBlogs"}
-                  className="text-white text-lg cursor-pointer hover:text-teal-500"
+                  className="text-white text-xl cursor-pointer hover:text-teal-500"
                 >
                   All Blogs
                 </Link>
               </li>
 
+             
+              {!authorised ? (
+                <>
+                  <li>
+                    <Link
+                      to={"/SignUp"}
+                      className="text-white text-xl cursor-pointer hover:text-teal-500"
+                    >
+                      SignUp
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to={"/Login"}
+                      className="text-white text-xl cursor-pointer hover:text-teal-500"
+                    >
+                      Login
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <li>
+                  <button
+                    onClick={logout}
+                    className="text-white text-xl cursor-pointer hover:text-teal-500"
+                  >
+                    Logout
+                  </button>
+                </li>
+              )}
+
               <li>
                 <Link
                   to={"/contact"}
-                  className="text-white text-lg cursor-pointer hover:text-teal-500"
+                  className="text-white text-xl cursor-pointer hover:text-teal-500"
                 >
                   Contact
                 </Link>

@@ -7,21 +7,18 @@ export const BlogProvider = ({ children }) => {
   const [blogs, setBlogs] = useState([]);
   const [oneBlog, setOneBlog] = useState(null);
  
-
-  useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const response = await axios.get(
           "http://localhost:3000/api/Blog/AllBlogs"
         );
+        
         setBlogs(response.data.blogs);
       } catch (error) {
         console.error("Error fetching blogs:", error);
       }
     };
 
-    fetchBlogs();
-  },[]);
 
   const fetchOneBlog = async (id) => {
     try {
@@ -53,14 +50,14 @@ export const BlogProvider = ({ children }) => {
       });
   };
 
-  
+
 
   return (
     <BlogContext.Provider
       value={{
         blogs,
         setBlogs,
-        
+        fetchBlogs,
         deleteBlog,
         oneBlog,
         setOneBlog,

@@ -6,6 +6,8 @@ import OneBlog from './componants/OneBlog';
 import Update from './componants/Update';
 import NavBar from './componants/NavBar';
 import Home from './componants/Home';
+import Register from './componants/Register';
+import Login from './componants/Login';
 
 const App = () => {
   return (
@@ -14,6 +16,8 @@ const App = () => {
        <NavBar/>
        <Routes>
         <Route path='/' element={<Home/>}></Route>
+        <Route path='/SignUp' element={<Register/>}></Route>
+        <Route path='/Login' element={<Login/>}></Route>
         <Route path='/Create' element={<Create/>}></Route>
         <Route path='/AllBlogs' element={<AllBlogs/>}></Route>
         <Route path='/OneBlog/:id' element={<OneBlog/>}></Route>

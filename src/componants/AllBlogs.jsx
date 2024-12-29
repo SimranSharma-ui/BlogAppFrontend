@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { FaDeleteLeft } from "react-icons/fa6";
@@ -6,7 +6,11 @@ import { FaEdit } from "react-icons/fa";
 import { useBlog } from "../contaxt/BlogProvider"; 
 
 const AllBlogs = () => {
-  const { blogs, deleteBlog } = useBlog();
+  const { blogs, fetchBlogs, deleteBlog } = useBlog();
+
+  useEffect(()=>{
+    fetchBlogs();
+  })
  
   const truncateDescription = (description, length) => {
     if (description.length > length) {
@@ -37,6 +41,10 @@ const AllBlogs = () => {
                 />
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">
                   {element.Name}
+                </h2>
+
+                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                   Category : {element?.Category}
                 </h2>
                 <p className="text-gray-600 mb-4">
                   {truncateDescription(element.Description, 200)} 

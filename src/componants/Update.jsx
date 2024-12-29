@@ -12,6 +12,7 @@ const Update = () => {
     Name: "",
     Description: "",
     liked: false,
+    Category:"",
     image: null,
   });
 
@@ -24,6 +25,7 @@ const Update = () => {
       setFormData({
         Name: blogToUpdate.Name,
         Description: blogToUpdate.Description,
+        Category:blogToUpdate?.Category,
         liked: blogToUpdate.liked,
         image: null, 
       });
@@ -47,6 +49,7 @@ const Update = () => {
 
     if (!formData.Name.trim()) newErrors.Name = "Name is required!";
     if (!formData.Description.trim()) newErrors.Description = "Description is required!";
+    if (!formData.Category.trim()) newErrors.Category = "Category is required!";
     if (!formData.image) newErrors.image = "Image is required!";
 
     if (Object.keys(newErrors).length > 0) {
@@ -57,6 +60,7 @@ const Update = () => {
     const formDataToSend = new FormData();
     formDataToSend.append("Name", formData.Name);
     formDataToSend.append("Description", formData.Description);
+    formDataToSend.append("Category", formData.Category);
     formDataToSend.append("liked", formData.liked);
     formDataToSend.append("image", formData.image);
 
@@ -71,7 +75,7 @@ const Update = () => {
 
       setBlogs(prevBlogs => prevBlogs.map(blog =>
         blog._id === res.data._id
-          ? { ...blog, Name: res.data.Name, Description: res.data.Description, liked: res.data.liked, Image: res.data.image }
+          ? { ...blog, Name: res.data.Name, Description: res.data.Description,Category:res.data.Category, liked: res.data.liked, Image: res.data.image }
           : blog
       ));
 
@@ -117,6 +121,18 @@ const Update = () => {
             onChange={handleChange}
           />
           {errors.Description && <span className="text-red-500">{errors.Description}</span>}
+        </div>
+
+        <div className="mb-6">
+          <input
+            className="w-full p-4 border-2 border-transparent rounded-md focus:outline-none focus:ring-4 focus:ring-teal-300"
+            type="text"
+            name="Category"
+            value={formData.Category}
+            placeholder="Write down the Category"
+            onChange={handleChange}
+          />
+          {errors.Category && <span className="text-red-500">{errors.Category}</span>}
         </div>
 
         <div className="mb-6">

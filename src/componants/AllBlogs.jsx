@@ -4,6 +4,7 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { FaDeleteLeft } from "react-icons/fa6";
 import { FaEdit } from "react-icons/fa";
 import { useBlog } from "../contaxt/BlogProvider"; 
+import BlogImage from "../assets/Blog.png";
 
 const AllBlogs = () => {
   const { blogs, fetchBlogs, deleteBlog } = useBlog();
@@ -21,9 +22,12 @@ const AllBlogs = () => {
 
   return (
     <div className="w-full max-w-7xl p-6 mx-auto">
-      <h1 className="text-3xl font-bold text-center mb-8">
+      <div className="flex flex-row justify-center">
+        <img src={BlogImage} className="object-contain w-24 h-auto "/>
+      <h1 className="text-4xl font-bold text-center mb-8 mt-6 font-serif">
         All Blogs Are Here
       </h1>
+      </div>
       {blogs.length === 0 ? (
         <p className="text-xl font-semibold text-center">No blogs available.</p>
       ) : (

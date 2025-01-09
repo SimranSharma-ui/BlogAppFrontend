@@ -19,15 +19,15 @@ export const AuthProvider = ({ children }) => {
   const [authorised, setAuthorised] = useState(localStorage.getItem("token") ? true : false);
   const [token, setToken] = useState(null);
 
-  useEffect(() => {
-    if (authorised) {
-      Swal.fire({
-        icon: 'success',
-        title: 'Sucessfully logged in!',
-        text: 'You are Sucessfully logged in.',
-      });
-    }
-  }, [authorised]);
+  // useEffect(() => {
+  //   if (authorised) {
+  //     Swal.fire({
+  //       icon: 'success',
+  //       title: 'Sucessfully logged in!',
+  //       text: 'You are Sucessfully logged in.',
+  //     });
+  //   }
+  // }, [authorised]);
 
   const handleChangeRegister = (e) => {
     const { name, value } = e.target;
@@ -127,6 +127,7 @@ export const AuthProvider = ({ children }) => {
         registerData,
         loginData,
         authorised,
+        token,
         handleChangeRegister,
         handleSubmitRegister,
         handleChangeLogin,

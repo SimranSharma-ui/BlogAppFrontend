@@ -12,7 +12,7 @@ const Home = () => {
           alt="Cartoon Cravings"
         />
       </div>
-      <div className="text-center mt-10">
+      <div className="text-center mt-10 ">
         <h1 className="text-9xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-fade-right">
           Cartoon Cravings
         </h1>

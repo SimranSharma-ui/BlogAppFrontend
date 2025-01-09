@@ -12,7 +12,6 @@ export const BlogProvider = ({ children }) => {
         const response = await axios.get(
           "http://localhost:3000/api/Blog/AllBlogs"
         );
-        
         setBlogs(response.data.blogs);
       } catch (error) {
         console.error("Error fetching blogs:", error);
@@ -42,7 +41,7 @@ export const BlogProvider = ({ children }) => {
     axios
       .delete(`http://localhost:3000/api/Blog/delete/${id}`)
       .then(() => {
-        console.log("Blog Deleted Successfully");
+        
         setBlogs((prevBlogs) => prevBlogs.filter((blog) => blog._id !== id));
       })
       .catch((err) => {

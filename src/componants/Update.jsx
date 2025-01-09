@@ -1,18 +1,18 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import { useBlog } from '../contaxt/BlogProvider';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { useBlog } from "../contaxt/BlogProvider";
 
 const Update = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { blogs, setBlogs } = useBlog();  
+  const { blogs, setBlogs } = useBlog();
 
   const [formData, setFormData] = useState({
     Name: "",
     Description: "",
     liked: false,
-    Category:"",
+    Category: "",
     image: null,
   });
 
@@ -20,14 +20,14 @@ const Update = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const blogToUpdate = blogs.find(blog => blog._id === id);
+    const blogToUpdate = blogs.find((blog) => blog._id === id);
     if (blogToUpdate) {
       setFormData({
         Name: blogToUpdate.Name,
         Description: blogToUpdate.Description,
-        Category:blogToUpdate?.Category,
+        Category: blogToUpdate?.Category,
         liked: blogToUpdate.liked,
-        image: null, 
+        image: null,
       });
     } else {
       alert("Blog not found.");
@@ -37,9 +37,10 @@ const Update = () => {
 
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
-    setFormData(prevData => ({
+    setFormData((prevData) => ({
       ...prevData,
-      [name]: type === "checkbox" ? checked : type === "file" ? files[0] : value,
+      [name]:
+        type === "checkbox" ? checked : type === "file" ? files[0] : value,
     }));
   };
 
@@ -48,7 +49,8 @@ const Update = () => {
     const newErrors = {};
 
     if (!formData.Name.trim()) newErrors.Name = "Name is required!";
-    if (!formData.Description.trim()) newErrors.Description = "Description is required!";
+    if (!formData.Description.trim())
+      newErrors.Description = "Description is required!";
     if (!formData.Category.trim()) newErrors.Category = "Category is required!";
     if (!formData.image) newErrors.image = "Image is required!";
 
@@ -67,17 +69,31 @@ const Update = () => {
     setLoading(true);
 
     try {
-      const res = await axios.put(`http://localhost:3000/api/Blog/update/${id}`, formDataToSend, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const res = await axios.put(
+        `http://localhost:3000/api/Blog/update/${id}`,
+        formDataToSend,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true,
+        }
+      );
 
-      setBlogs(prevBlogs => prevBlogs.map(blog =>
-        blog._id === res.data._id
-          ? { ...blog, Name: res.data.Name, Description: res.data.Description,Category:res.data.Category, liked: res.data.liked, Image: res.data.image }
-          : blog
-      ));
+      setBlogs((prevBlogs) =>
+        prevBlogs.map((blog) =>
+          blog._id === res.data._id
+            ? {
+                ...blog,
+                Name: res.data.Name,
+                Description: res.data.Description,
+                Category: res.data.Category,
+                liked: res.data.liked,
+                Image: res.data.image,
+              }
+            : blog
+        )
+      );
 
       alert("Blog updated successfully!");
       navigate("/AllBlogs");
@@ -120,7 +136,9 @@ const Update = () => {
             placeholder="Write down the Description"
             onChange={handleChange}
           />
-          {errors.Description && <span className="text-red-500">{errors.Description}</span>}
+          {errors.Description && (
+            <span className="text-red-500">{errors.Description}</span>
+          )}
         </div>
 
         <div className="mb-6">
@@ -132,7 +150,9 @@ const Update = () => {
             placeholder="Write down the Category"
             onChange={handleChange}
           />
-          {errors.Category && <span className="text-red-500">{errors.Category}</span>}
+          {errors.Category && (
+            <span className="text-red-500">{errors.Category}</span>
+          )}
         </div>
 
         <div className="mb-6">

@@ -5,7 +5,7 @@ import { useAuth } from '../contaxt/AuthProvider';
 import Swal from 'sweetalert2';
 
 const NavBar = () => {
-  const { authorised, logout } = useAuth();
+  const { authorised, logout ,token } = useAuth();
   const navigate = useNavigate();
   
   const handleCreateBlogClick = () => {
@@ -71,8 +71,6 @@ const NavBar = () => {
                   All Blogs
                 </Link>
               </li>
-
-             
               {!authorised ? (
                 <>
                   <li>

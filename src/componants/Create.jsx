@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useBlog } from "../contaxt/BlogProvider";
+import Image from '../assets/CreateNote.png';
 
 const Create = () => {
   const [formData, setFormData] = useState({
@@ -87,9 +88,12 @@ const Create = () => {
         className="w-full md:w-1/2 mx-auto bg-gradient-to-r from-blue-500 to-teal-400 shadow-xl rounded-lg p-8 transform hover:scale-105 transition duration-300 ease-in-out"
         onSubmit={handleSubmit}
       >
-        <h1 className="text-4xl font-extrabold text-white text-center mb-6">
+        <div className="flex flex-row content-center justify-center">
+          <img src={Image} className="w-24 object-contain h-auto animate-wiggle-more animate-infinite"/>
+        <h1 className="text-4xl font-extrabold text-white text-center mb-6 mt-4">
           Create A Blog
         </h1>
+        </div>
 
         <div className="mb-6">
           <input

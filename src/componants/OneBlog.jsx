@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useBlog } from "../contaxt/BlogProvider";
+import image from '../assets/image.png';
 
 const OneBlog = () => {
   const { id } = useParams();
   const { oneBlog, fetchOneBlog } = useBlog();
-  console.log(oneBlog);
-
   useEffect(() => {
     fetchOneBlog(id);
   }, [id, fetchOneBlog]);
@@ -29,9 +28,12 @@ const OneBlog = () => {
 
   return (
     <div className="w-full max-w-7xl p-6 mx-auto">
+      <div className="flex flex-row justify-center content-center">
+      <img src={image} className="w-24 h-auto object-contain"/>
       <h1 className="text-4xl font-bold text-center mb-8 text-gray-800">
         Blog Details
       </h1>
+      </div>
       <div className="bg-white shadow-lg rounded-lg p-6 space-y-6 transition-transform transform hover:scale-105">
         <div className="flex justify-center">
           <img

@@ -83,9 +83,9 @@ const Create = () => {
   });
 
   return (
-    <div className="w-full max-w-7xl mx-auto p-4">
+    <div className="w-full max-w-7xl mx-auto p-4 animate-slideLeftToRight">
       <form
-        className="w-full md:w-1/2 mx-auto bg-gradient-to-r from-blue-500 to-teal-400 shadow-xl rounded-lg p-8 transform hover:scale-105 transition duration-300 ease-in-out"
+        className="w-full md:w-1/2 mx-auto text-black bg-gradient-to-r from-blue-500 to-teal-400 shadow-xl rounded-lg p-8 transform hover:scale-105 transition duration-300 ease-in-out"
         onSubmit={handleSubmit}
       >
         <div className="flex flex-row content-center justify-center">

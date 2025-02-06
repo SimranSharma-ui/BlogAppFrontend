@@ -30,12 +30,12 @@ const OneBlog = () => {
     <div className="w-full max-w-7xl p-6 mx-auto">
       <div className="flex flex-row justify-center content-center">
       <img src={image} className="w-24 h-auto object-contain"/>
-      <h1 className="text-4xl font-bold text-center mb-8 text-gray-800">
+      <h1 className="text-4xl font-bold text-center mb-8 mt-6 ">
         Blog Details
       </h1>
       </div>
-      <div className="bg-white shadow-lg rounded-lg p-6 space-y-6 transition-transform transform hover:scale-105">
-        <div className="flex justify-center">
+      <div className=" p-6 space-y-6 transition-transform transform hover:scale-105">
+        <div className="flex justify-center animate-slideLeftToRight">
           <img
             src={oneBlog.Image}
             className="h-96 w-auto object-cover rounded-lg"
@@ -43,11 +43,11 @@ const OneBlog = () => {
           />
         </div>
 
-        <h2 className="text-3xl font-semibold text-gray-800">{oneBlog.Name}</h2>
+        <h2 className="text-4xl font-semibold animate-slideRightToLeft ">{oneBlog.Name}</h2>
 
-        <p className="text-gray-800 mb-4">{oneBlog.Description}</p>
+        <p className=" mb-4 animate-slideRightToLeft">{oneBlog.Description}</p>
 
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-3 animate-slideRightToLeft">
           <span
             className={`cursor-pointer text-2xl ${
               oneBlog.liked ? "text-red-500" : "text-gray-400"
@@ -55,7 +55,7 @@ const OneBlog = () => {
           >
             {oneBlog.liked ? "❤️" : "🤍"}
           </span>
-          <span className="text-gray-500 text-sm">
+          <span className="text-sm">
             {oneBlog.liked ? "Liked" : "Not Liked"}
           </span>
         </div>

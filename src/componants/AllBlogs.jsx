@@ -21,7 +21,7 @@ const AllBlogs = () => {
   };
 
   return (
-    <div className="w-full max-w-7xl p-6 mx-auto">
+    <div className="w-full max-w-7xl p-6 mx-auto animate-fadeInFromBottom">
       <div className="flex flex-row justify-center">
         <img src={BlogImage} className="object-contain w-24 h-auto "/>
       <h1 className="text-4xl font-bold text-center mb-8 mt-6 font-serif">

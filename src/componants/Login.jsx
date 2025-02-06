@@ -1,4 +1,5 @@
 
+import { Link } from 'react-router-dom';
 import { useAuth } from '../contaxt/AuthProvider';
 
 const Login = () => {
@@ -12,7 +13,7 @@ const Login = () => {
         <div className="mb-6">
           <label>Email:</label>
           <input
-            className="w-full p-4 border-2 border-transparent rounded-md focus:outline-none focus:ring-4 focus:ring-teal-300"
+            className="w-full p-4 border-2 text-black border-transparent rounded-md focus:outline-none focus:ring-4 focus:ring-teal-300"
             type="email"
             name="Email"
             value={loginData.Email}
@@ -23,7 +24,7 @@ const Login = () => {
         <div className="mb-6">
           <label>Password:</label>
           <input
-           className="w-full p-4 border-2 border-transparent rounded-md focus:outline-none focus:ring-4 focus:ring-teal-300"
+           className="w-full p-4 border-2 text-black border-transparent rounded-md focus:outline-none focus:ring-4 focus:ring-teal-300"
             type="password"
             name="Password"
             value={loginData.Password}
@@ -32,6 +33,7 @@ const Login = () => {
           />
         </div>
         <button className="w-full p-4 bg-teal-500 text-white font-semibold rounded-lg hover:bg-teal-600 transition duration-300" type="submit">Login</button>
+        <Link  to={"/ForgetPassword"} ><h1 className='text-blue-950'>Forget Password?</h1></Link>
       </form>
       {loginmessage && <p >{loginmessage}</p>} 
     </div>

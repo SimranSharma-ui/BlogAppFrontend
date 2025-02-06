@@ -1,11 +1,13 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import Swal from "sweetalert2"; 
+import Swal from "sweetalert2";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [registerData, setRegisterData] = useState({
     Name: "",
     Email: "",
@@ -16,18 +18,10 @@ export const AuthProvider = ({ children }) => {
     Password: "",
   });
   const tokenFromCookies = Cookies.get("token");
-  const [authorised, setAuthorised] = useState(localStorage.getItem("token") ? true : false);
+  const [authorised, setAuthorised] = useState(
+    localStorage.getItem("token") ? true : false
+  );
   const [token, setToken] = useState(null);
-
-  // useEffect(() => {
-  //   if (authorised) {
-  //     Swal.fire({
-  //       icon: 'success',
-  //       title: 'Sucessfully logged in!',
-  //       text: 'You are Sucessfully logged in.',
-  //     });
-  //   }
-  // }, [authorised]);
 
   const handleChangeRegister = (e) => {
     const { name, value } = e.target;
@@ -45,15 +39,18 @@ export const AuthProvider = ({ children }) => {
         registerData
       );
       Swal.fire({
-        icon: 'success',
-        title: 'Registration Successful!',
+        icon: "success",
+        title: "Registration Successful!",
         text: response.data.message,
       });
+      navigate('/Login');
     } catch (error) {
       Swal.fire({
-        icon: 'error',
-        title: 'Registration Failed!',
-        text: error.response ? error.response.data.message : "An error occurred",
+        icon: "error",
+        title: "Registration Failed!",
+        text: error.response
+          ? error.response.data.message
+          : "An error occurred",
       });
     }
   };
@@ -77,23 +74,25 @@ export const AuthProvider = ({ children }) => {
       );
 
       if (response.data.token) {
-        Cookies.set('token', response.data.token, { expires: 7, secure: true });
+        Cookies.set("token", response.data.token, { expires: 7, secure: true });
         setToken(response.data.token);
         localStorage.setItem("token", response.data.token);
         setAuthorised(true);
-        
+        navigate("/AllBlogs");
         Swal.fire({
-          icon: 'success',
-          title: 'Login Successful!',
+          icon: "success",
+          title: "Login Successful!",
           text: response.data.message,
         });
       }
     } catch (error) {
       setAuthorised(false);
       Swal.fire({
-        icon: 'error',
-        title: 'Login Failed!',
-        text: error.response ? error.response.data.message : "An error occurred",
+        icon: "error",
+        title: "Login Failed!",
+        text: error.response
+          ? error.response.data.message
+          : "An error occurred",
       });
     }
   };
@@ -101,21 +100,24 @@ export const AuthProvider = ({ children }) => {
   const logout = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.get("http://localhost:3000/Authorisation/Logout", { withCredentials: true });
+      const { data } = await axios.get(
+        "http://localhost:3000/Authorisation/Logout",
+        { withCredentials: true }
+      );
       localStorage.removeItem("token");
       Cookies.remove("token");
       setAuthorised(false);
-
+      navigate('/Login');
       Swal.fire({
-        icon: 'success',
-        title: 'Logged Out!',
-        text: 'You have been successfully logged out.',
+        icon: "success",
+        title: "Logged Out!",
+        text: "You have been successfully logged out.",
       });
     } catch (err) {
       console.log("Error logging out:", err);
       Swal.fire({
-        icon: 'error',
-        title: 'Logout Failed!',
+        icon: "error",
+        title: "Logout Failed!",
         text: "An error occurred while logging out.",
       });
     }

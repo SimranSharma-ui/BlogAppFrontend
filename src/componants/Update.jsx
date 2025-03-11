@@ -115,7 +115,7 @@ const Update = () => {
           Update The Blog
         </h1>
 
-        <div className="mb-6">
+        <div className="mb-6 text-black">
           <input
             className="w-full p-4 border-2 border-transparent rounded-md focus:outline-none focus:ring-4 focus:ring-teal-300"
             type="text"
@@ -127,7 +127,7 @@ const Update = () => {
           {errors.Name && <span className="text-red-500">{errors.Name}</span>}
         </div>
 
-        <div className="mb-6">
+        <div className="mb-6 text-black">
           <input
             className="w-full p-4 border-2 border-transparent rounded-md focus:outline-none focus:ring-4 focus:ring-teal-300"
             type="text"
@@ -141,7 +141,7 @@ const Update = () => {
           )}
         </div>
 
-        <div className="mb-6">
+        <div className="mb-6 text-black">
           <input
             className="w-full p-4 border-2 border-transparent rounded-md focus:outline-none focus:ring-4 focus:ring-teal-300"
             type="text"
@@ -155,7 +155,7 @@ const Update = () => {
           )}
         </div>
 
-        <div className="mb-6">
+        <div className="mb-6 text-black">
           <label className="inline-flex items-center text-white">
             <input
               className="mr-2 h-5 w-5 text-teal-500"
@@ -168,7 +168,7 @@ const Update = () => {
           </label>
         </div>
 
-        <div className="mb-6">
+        <div className="mb-6 text-black">
           <input
             className="w-full p-4 border-2 border-transparent rounded-md focus:outline-none focus:ring-4 focus:ring-teal-300"
             type="file"

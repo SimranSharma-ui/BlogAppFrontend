@@ -40,26 +40,26 @@ const Contact = () => {
   };
 
   return (
-    <div className="bg-slate-700 p-6 font-serif">
-      <div className="flex justify-center items-center h-screen text-white">
+    <div className=" p-6 font-serif">
+      <div className="flex justify-center items-center h-screen ">
         <div className="flex flex-col lg:flex-row w-full lg:w-3/4">
           <div className="lg:w-1/2 p-4 animate-slideLeftToRight">
             <h1 className="text-3xl font-bold mb-8 mt-6">CONTACT ME</h1>
             <div className="border-b-2 border-blue-500 w-16 ml-10 mb-4 mt-0"></div>
             <div className="flex items-center mb-4">
-              <div className="w-10 h-10 flex justify-center items-center border-2 border-white rounded-full mr-4">
+              <div className="w-10 h-10 flex justify-center items-center border-2  rounded-full mr-4">
                 <FaPhoneAlt />
               </div>
               <span>6284415949</span>
             </div>
             <div className="flex items-center mb-4">
-              <div className="w-10 h-10 flex justify-center items-center border-2 border-white rounded-full mr-4">
+              <div className="w-10 h-10 flex justify-center items-center border-2  rounded-full mr-4">
                 <MdEmail />
               </div>
               <span>sharmasimran@gmail.com</span>
             </div>
             <div className="flex items-center mb-4">
-              <div className="w-10 h-10 flex justify-center items-center border-2 border-white rounded-full mr-4">
+              <div className="w-10 h-10 flex justify-center items-center border-2  rounded-full mr-4">
                 <IoLocation />
               </div>
               <span>#1244 Sector-52, D Chandigarh</span>

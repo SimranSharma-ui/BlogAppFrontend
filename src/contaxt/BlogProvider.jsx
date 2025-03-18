@@ -13,16 +13,14 @@ export const BlogProvider = ({ children }) => {
         "https://blogappbackend-8pw0.onrender.com/api/Blog/AllBlogs",
         { withCredentials: true }
       );
-      console.log("API Response:", response.data); // Debugging
-      setBlogs(response.data.blogs || []); // ✅ Ensuring blogs is always an array
+      console.log("API Response:", response.data);
+      setBlogs(response.data.blogs || []); 
     } catch (error) {
       console.error("Error fetching blogs:", error);
-      setBlogs([]); // ✅ Prevent undefined issues
+      setBlogs([]); 
     }
   };
   
-
-
   const fetchOneBlog = async (id) => {
     try {
       const response = await axios.get(

@@ -10,7 +10,9 @@ const ForgotPassword = () => {
         try {
             const response = await axios.post(
                 'https://blogappbackend-8pw0.onrender.com/Authorisation/ForgetPassword',
-                { email } 
+                { email } ,{
+                    withCredentials:true
+                  }
             );
             console.log(response.data);
             alert("Password reset email sent successfully!"); 

@@ -25,7 +25,9 @@ export const BlogProvider = ({ children }) => {
   const fetchOneBlog = async (id) => {
     try {
       const response = await axios.get(
-        `https://blogappbackend-8pw0.onrender.com/api/Blog/getOneBlog/${id}`
+        `https://blogappbackend-8pw0.onrender.com/api/Blog/getOneBlog/${id}`,{
+          withCredentials:true
+        }
       );
       setOneBlog(response.data.existedBlog);
     } catch (error) {
@@ -42,7 +44,9 @@ export const BlogProvider = ({ children }) => {
 
   const deleteBlog = (id) => {
     axios
-      .delete(`https://blogappbackend-8pw0.onrender.com/api/Blog/delete/${id}`)
+      .delete(`https://blogappbackend-8pw0.onrender.com/api/Blog/delete/${id}`,{
+        withCredentials:true
+      })
       .then(() => {
         
         setBlogs((prevBlogs) => prevBlogs.filter((blog) => blog._id !== id));

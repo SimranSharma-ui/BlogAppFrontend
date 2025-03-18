@@ -36,7 +36,9 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await axios.post(
         "https://blogappbackend-8pw0.onrender.com/Authorisation/Register",
-        registerData
+        registerData,{
+          withCredentials:true
+        }
       );
       Swal.fire({
         icon: "success",

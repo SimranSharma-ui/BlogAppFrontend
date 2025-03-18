@@ -13,7 +13,9 @@ const ResetPassword = () => {
         try {
             const response = await axios.post(
                 `https://blogappbackend-8pw0.onrender.com/Authorisation/reset-password/${token}`,
-                {password } 
+                {password } ,{
+                    withCredentials:true
+                  }
             );
             console.log(response.data);
              navigate('/Login');

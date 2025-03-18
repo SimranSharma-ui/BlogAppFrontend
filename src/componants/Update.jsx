@@ -70,7 +70,7 @@ const Update = () => {
 
     try {
       const res = await axios.put(
-        `http://localhost:3000/api/Blog/update/${id}`,
+        `https://blogappbackend-8pw0.onrender.com/api/Blog/update/${id}`,
         formDataToSend,
         {
           headers: {

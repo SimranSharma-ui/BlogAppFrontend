@@ -88,6 +88,7 @@ export const AuthProvider = ({ children }) => {
         });
       }
     } catch (error) {
+      console.log("errorbmdhgxk",error);
       setAuthorised(false);
       Swal.fire({
         icon: "error",

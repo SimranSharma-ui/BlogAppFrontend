@@ -11,7 +11,7 @@ const AllBlogs = () => {
 
   useEffect(()=>{
     fetchBlogs();
-  },[])
+  },[]);
  
   const truncateDescription = (description, length) => {
     if (description.length > length) {

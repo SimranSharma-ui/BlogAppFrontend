@@ -7,19 +7,20 @@ export const BlogProvider = ({ children }) => {
   const [blogs, setBlogs] = useState([]);
   const [oneBlog, setOneBlog] = useState(null);
  
-    const fetchBlogs = async () => {
-      try {
-        const response = await axios.get(
-          "https://blogappbackend-8pw0.onrender.com/api/Blog/AllBlogs",{
-            withCredentials:true
-          }
-        );
-        console.log("response",response.data.blogs);
-        setBlogs(response.blogs);
-      } catch (error) {
-        console.error("Error fetching blogs:", error);
-      }
-    };
+  const fetchBlogs = async () => {
+    try {
+      const response = await axios.get(
+        "https://blogappbackend-8pw0.onrender.com/api/Blog/AllBlogs",
+        { withCredentials: true }
+      );
+      console.log("API Response:", response.data); // Debugging
+      setBlogs(response.data.blogs || []); // ✅ Ensuring blogs is always an array
+    } catch (error) {
+      console.error("Error fetching blogs:", error);
+      setBlogs([]); // ✅ Prevent undefined issues
+    }
+  };
+  
 
 
   const fetchOneBlog = async (id) => {

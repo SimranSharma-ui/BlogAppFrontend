@@ -57,7 +57,7 @@ const Create = () => {
     formDataToSend.append("image", formData.image);
 
     try {
-      const res = await axios.post("http://localhost:3000/api/Blog/Create", formDataToSend, {
+      const res = await axios.post("https://blogappbackend-8pw0.onrender.com/api/Blog/Create", formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data", 
         },

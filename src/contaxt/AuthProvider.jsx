@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/Authorisation/Register",
+        "https://blogappbackend-8pw0.onrender.com/Authorisation/Register",
         registerData
       );
       Swal.fire({
@@ -68,7 +68,7 @@ export const AuthProvider = ({ children }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/Authorisation/Login",
+        "https://blogappbackend-8pw0.onrender.com/Authorisation/Login",
         loginData,
         { withCredentials: true }
       );
@@ -101,7 +101,7 @@ export const AuthProvider = ({ children }) => {
     e.preventDefault();
     try {
       const { data } = await axios.get(
-        "http://localhost:3000/Authorisation/Logout",
+        "https://blogappbackend-8pw0.onrender.com/Authorisation/Logout",
         { withCredentials: true }
       );
       localStorage.removeItem("token");

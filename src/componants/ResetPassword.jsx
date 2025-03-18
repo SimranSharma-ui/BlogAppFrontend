@@ -12,7 +12,7 @@ const ResetPassword = () => {
         e.preventDefault();
         try {
             const response = await axios.post(
-                `http://localhost:3000/Authorisation/reset-password/${token}`,
+                `https://blogappbackend-8pw0.onrender.com/Authorisation/reset-password/${token}`,
                 {password } 
             );
             console.log(response.data);

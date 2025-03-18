@@ -9,7 +9,7 @@ const ForgotPassword = () => {
         
         try {
             const response = await axios.post(
-                'http://localhost:3000/Authorisation/ForgetPassword',
+                'https://blogappbackend-8pw0.onrender.com/Authorisation/ForgetPassword',
                 { email } 
             );
             console.log(response.data);

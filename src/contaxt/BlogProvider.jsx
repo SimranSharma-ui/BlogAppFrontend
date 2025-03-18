@@ -10,7 +10,9 @@ export const BlogProvider = ({ children }) => {
     const fetchBlogs = async () => {
       try {
         const response = await axios.get(
-          "https://blogappbackend-8pw0.onrender.com/api/Blog/AllBlogs"
+          "https://blogappbackend-8pw0.onrender.com/api/Blog/AllBlogs",{
+            withCredentials:true
+          }
         );
         console.log("response",response.data);
         setBlogs(response.blogs);

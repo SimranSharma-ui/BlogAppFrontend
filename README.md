@@ -28,7 +28,7 @@
 </ul>
 
 <h3>Clone the repository</h3>
-<h4>git clone https://github.com/SimranSharma-ui/Blog2Frontend
+<h4>git clone https://github.com/SimranSharma-ui/BlogAppFrontend
 cd blog-app</h4>
 
 

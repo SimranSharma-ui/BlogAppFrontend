@@ -72,7 +72,10 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.post(
         "https://blogappbackend-8pw0.onrender.com/Authorisation/Login",
         loginData,
-        { withCredentials: true }
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true, 
+        }
       );
 
       if (response.data.token) {

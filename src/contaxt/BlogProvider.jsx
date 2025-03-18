@@ -12,7 +12,8 @@ export const BlogProvider = ({ children }) => {
         const response = await axios.get(
           "https://blogappbackend-8pw0.onrender.com/api/Blog/AllBlogs"
         );
-        setBlogs(response.data.blogs);
+        console.log("response",response.data);
+        setBlogs(response.blogs);
       } catch (error) {
         console.error("Error fetching blogs:", error);
       }
@@ -48,8 +49,6 @@ export const BlogProvider = ({ children }) => {
         console.error("Error deleting the blog:", err);
       });
   };
-
-
 
   return (
     <BlogContext.Provider

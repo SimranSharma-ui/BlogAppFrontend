@@ -47,7 +47,7 @@ const NavBar = () => {
       
         <ul
           className={`md:flex md:items-center md:space-x-8 absolute md:static bg-gray-900 text-white md:bg-transparent w-full md:w-auto left-0 transition-all duration-300 ease-in-out 
-          ${menuOpen ? "top-16 opacity-100 visible" : "top-[-400px] opacity-0 invisible"} 
+          ${menuOpen ? "top-24 opacity-100 visible" : "top-[-400px] opacity-0 invisible"} 
           md:top-auto md:opacity-100 md:visible md:flex-row flex flex-col items-center p-4 md:p-0 z-50`}
         >
           <li>

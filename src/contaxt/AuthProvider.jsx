@@ -79,6 +79,7 @@ export const AuthProvider = ({ children }) => {
       );
 
       if (response.data.token) {
+        
         Cookies.set("token", response.data.token, { expires: 7, secure: true });
         setToken(response.data.token);
         localStorage.setItem("token", response.data.token);

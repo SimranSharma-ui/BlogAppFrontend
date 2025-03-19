@@ -2,11 +2,14 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useBlog } from "../contaxt/BlogProvider";
+import Cookies from "js-cookie";
 
 const Update = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { blogs, setBlogs } = useBlog();
+  const token = Cookies.get("token");
+  console.log(token);
 
   const [formData, setFormData] = useState({
     Name: "",
@@ -75,11 +78,12 @@ const Update = () => {
         {
           headers: {
             "Content-Type": "multipart/form-data",
+            "Authorization": `Bearer ${token}`,
           },
           withCredentials: true,
         }
       );
-
+      
       setBlogs((prevBlogs) =>
         prevBlogs.map((blog) =>
           blog._id === res.data._id

@@ -3,8 +3,10 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useBlog } from "../contaxt/BlogProvider";
 import Image from '../assets/CreateNote.png';
+import Cookies from "js-cookie";
 
 const Create = () => {
+  const token = Cookies.get("token")
   const [formData, setFormData] = useState({
     Name: "",
     Description: "",
@@ -60,6 +62,7 @@ const Create = () => {
       const res = await axios.post("https://blogappbackend-8pw0.onrender.com/api/Blog/Create", formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data", 
+          "Authorization": `Bearer ${token}`,
         },
         withCredentials:true,
       });

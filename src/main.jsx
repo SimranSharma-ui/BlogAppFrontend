@@ -8,7 +8,7 @@ import { ThemeProvider } from './contaxt/ThemeProvider.jsx';
 import { BrowserRouter } from 'react-router-dom';
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+ 
     <BrowserRouter>
     <BlogProvider>
       <AuthProvider>
@@ -18,5 +18,5 @@ createRoot(document.getElementById('root')).render(
     </AuthProvider>
     </BlogProvider>
     </BrowserRouter>
-  </StrictMode>,
+ 
 )
